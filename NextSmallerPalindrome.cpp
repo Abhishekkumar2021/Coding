@@ -17,6 +17,5 @@ using namespace std;
 
 string nextLargestPalindrome(string s, int length){
 	// Write your code here.
-    
 	
 } 
