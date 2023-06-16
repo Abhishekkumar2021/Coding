@@ -27,13 +27,6 @@ bool canPlace(int board[][9], int i, int j, int n, int number){
 bool sudokuSolver(int board[][9], int i, int j, int n){
 	// Base Case
 	if(i==n){
-		// Print the board
-		for(int i=0; i<n; i++){
-			for(int j=0; j<n; j++){
-				cout<<board[i][j]<<" ";
-			}
-			cout<<endl;
-		}
 		return true;
 	}
 	// Case Row End
