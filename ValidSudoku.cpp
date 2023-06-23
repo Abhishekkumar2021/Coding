@@ -1,40 +1,23 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isItSudoku(int matrix[9][9]) {
-    // Write your code here.
+bool isValidSudoku(vector<vector<char>>& board) {
     for(int i=0; i<9; i++){
         for(int j=0; j<9; j++){
-            if(matrix[i][j]==0)
-            continue;
-
-            // Row check
-            for(int k=j+1; k<9; k++){
-                if(matrix[i][j]==matrix[i][k])
-                return false;
+            if(board[i][j] == '.') continue;
+            for(int k=0; k<9; k++){
+                if(k!=j && board[i][j] == board[i][k]) return false;
+                if(k!=i && board[i][j] == board[k][j]) return false;
             }
-
-            // Column check
-            for(int k=i+1; k<9; k++){
-                if(matrix[i][j]==matrix[k][j])
-                return false;
-            }
-
-            // Subgrid check
-            int subgridRow = i/3;
-            int subgridCol = j/3;
-            int x = subgridRow*3;
-            int y = subgridCol*3;
-            for(int k=x; k<x+3; k++){
-                for(int l=y; l<y+3; l++){
-                    if(k==i && l==j)
-                    continue;
-                    if(matrix[i][j]==matrix[k][l])
-                    return false;
+            for(int k=0; k<3; k++){
+                for(int l=0; l<3; l++){
+                    int x = i/3*3 + k;
+                    int y = j/3*3 + l;
+                    if(x!=i && y!=j && board[i][j] == board[x][y]) return false;
                 }
             }
+
         }
     }
-
     return true;
-} 
+}
