@@ -1,7 +1,0 @@
-Move disk 1 from rod 1 to rod 3
-Move disk 2 from rod 1 to rod 2
-Move disk 1 from rod 3 to rod 2
-Move disk 3 from rod 1 to rod 3
-Move disk 1 from rod 2 to rod 1
-Move disk 2 from rod 2 to rod 3
-Move disk 1 from rod 1 to rod 3
