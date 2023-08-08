@@ -4,33 +4,35 @@ using namespace std;
 class Solution {
 public:
     int ladderLength(string src, string des, vector<string>& wordList) {
-        int ans = 0;
         int n = src.size();
-        queue<pair<string, int>> q;
+        queue<string> q;
         unordered_set<string> s(wordList.begin(), wordList.end());
-        q.push({src, 1});
+        q.push(src);
+        int level = 1;
         s.erase(src);
         while(!q.empty()){
-            pair<string, int> p = q.front();
-            q.pop();
-            string str = p.first;
-            int len = p.second;
-            if(str == des){
-                ans = len;
-                break;
-            }
-            for(int i = 0; i < n; i++){
-                char ch = str[i];
-                for(int j = 0; j < 26; j++){
-                    str[i] = 'a' + j;
-                    if(s.find(str) != s.end()){
-                        q.push({str, len + 1});
-                        s.erase(str);
-                    }
+            int n = q.size();
+            while(n--){ // Traversing level by level
+                string curr = q.front();
+                q.pop();
+                if(curr == des){
+                    return level;
                 }
-                str[i] = ch;
+                for(int i=0; i<curr.size(); i++){
+                    char temp = curr[i];
+                    for(char c='a'; c<='z'; c++){
+                        curr[i] = c;
+                        if(s.find(curr) != s.end()){
+                            q.push(curr);
+                            s.erase(curr);
+                        }
+                    }
+                    curr[i] = temp;
+                }
             }
+            level++;
+
         }
-        return ans;
+        return 0;
     }
 };
