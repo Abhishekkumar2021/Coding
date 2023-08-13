@@ -20,14 +20,17 @@ int solve(int n) {
         q.pop();
         
         if(x%2==0){
-            string half = ans.substr(0, n/2);
-            q.push(half + "0" + half);
-            q.push(half + "1" + half);
+            string a = ans.substr(0, x/2);
+            string b = ans.substr(x/2);
+            q.push(a + "0" + b);
+            q.push(a + "1" + b);
         }else{
-            string half = ans.substr(0, n/2-1);
-            char ch = ans[n/2];
-            q.push(half + to_string(ch) + to_string(ch) + half);
+            string a = ans.substr(0, x/2);
+            string b = ans.substr(x/2+1);
+            char ch = ans[x/2];
+            q.push(a + ch + ch + b);
         }
+
     }
     
     return toInt(ans);

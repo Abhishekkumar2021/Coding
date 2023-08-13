@@ -8,4 +8,5 @@ void swap(int &x, int i, int j){
 int main(){
     int x = 10;
     swap(x, 1, 3);
+    cout << x;
 }

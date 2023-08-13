@@ -33,7 +33,6 @@ void bfs(int x, int n){
         int num = q.front();
         q.pop();
         if(num <= n){
-            cout<<num<<" ";
             int last_digit = num%10;
             if(last_digit == 0){
                 q.push(num*10 + last_digit + 1);

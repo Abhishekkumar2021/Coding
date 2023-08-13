@@ -1,0 +1,3 @@
+Not Armstrong Number
+Size: 5
+Length: 5
