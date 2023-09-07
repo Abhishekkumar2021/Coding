@@ -18,10 +18,8 @@ vector<vector<int>> getValid(vector<vector<int>> solutions,int cap,vector<int> w
     vector<vector<int>> ans;
     for(int i=0; i<solutions.size(); i++){
         int sum = 0;
-        for(int j=0; j<solutions[i].size(); j++){
-            
+        for(int j=0; j<solutions[i].size(); j++){   
         }
-
     }
 }
 

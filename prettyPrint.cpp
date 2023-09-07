@@ -1,16 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
-int c = 0;
-int main(){
-    int A = 4;
-    int n = 2*A- 1;
-    for(int i=0; i<n; i++){
-        for(int j= 0; j<n; j++){
-            if(i==c || i==n-1-c || j==c || j== n-1-c){
-            }
-            cout<<A-c<<" ";  
-        }
-        c++;
-        cout<<"\n";
+
+vector<vector<int>> prettyPrint(int n) {
+    int size = 2*n-1;
+    vector<vector<int>> ans(size, vector<int>(size));
+    int depth = 0;
+    while(depth < n){
+        for(int i=depth; i<size-depth; i++) ans[depth][i] = n - depth;
+        for(int i=depth; i<size-depth; i++) ans[size-depth-1][i] = n - depth;
+        for(int i=depth; i<size-depth; i++) ans[i][depth] = n - depth;
+        for(int i=depth; i<size-depth; i++) ans[i][size-depth-1] = n - depth;
+        depth++;
     }
+    return ans;
 }
