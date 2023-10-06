@@ -1,72 +1,38 @@
+// User function Template for C++
 #include<bits/stdc++.h>
 using namespace std;
 
-/*
-Problem: Alien Dictionary
-Given a sorted dictionary of an alien language having N words and k starting alphabets of standard dictionary.
-Find the order of characters in the alien language.
-
-Approach:
-1. Create a graph with nodes as characters of the given words.
-2. Find the topological sort of the graph.
-3. Return the topological sort.
-
-*/
-
-vector<char> getAlienLanguage(string* dictionary, int n)
-{
-    // Write your code here.
-    vector<char> ans;
-    unordered_map<char, unordered_set<char>> graph;
-    for(int i=0; i<n-1; i++){
-        string word1 = dictionary[i];
-        string word2 = dictionary[i+1];
-        int j=0;
-        while(j<word1.length() && j<word2.length()){
-            if(word1[j] != word2[j]){
-                graph[word1[j]].insert(word2[j]);
-                break;
-            }
-            j++;
-        }
-    }
-
-    unordered_map<char, int> indegree;
-    for(auto it=graph.begin(); it!=graph.end(); it++){
-        char node = it->first;
-        indegree[node] = 0;
-    }
-
-    for(auto it=graph.begin(); it!=graph.end(); it++){
-        char node = it->first;
-        for(auto it2=graph[node].begin(); it2!=graph[node].end(); it2++){
-            char nbr = *it2;
-            indegree[nbr]++;
-        }
-    }
-
-    queue<char> q;
-    for(auto it=indegree.begin(); it!=indegree.end(); it++){
-        char node = it->first;
-        if(indegree[node] == 0){
-            q.push(node);
-        }
-    }
-
-    while(!q.empty()){
-        char node = q.front();
-        q.pop();
-        ans.push_back(node);
-        for(auto it=graph[node].begin(); it!=graph[node].end(); it++){
-            char nbr = *it;
-            indegree[nbr]--;
-            if(indegree[nbr] == 0){
-                q.push(nbr);
+class Solution{
+    public:
+    string findOrder(string dict[], int n, int k) {
+        //code here
+        vector<int> adj[k];
+        vector<int> indegree(k, 0);
+        for(int i=1; i<n; i++){
+            string a = dict[i-1];
+            string b = dict[i];
+            for(int j=0; j<min(a.size(), b.size()); j++){
+                if(a[j] != b[j]){
+                    adj[a[j]-'a'].push_back(b[j]-'a');
+                    indegree[b[j]-'a']++;
+                    break;
+                }
             }
         }
+        
+        string ans = "";
+        queue<int> q;
+        for(int i=0; i<k; i++) if(indegree[i]==0) q.push(i);
+        
+        while(!q.empty()){
+            int x = q.front();
+            q.pop();
+            ans.push_back(x + 'a');
+            for(auto &child: adj[x]){
+                indegree[child]--;
+                if(indegree[child]==0) q.push(child);
+            }
+        }
+        return ans;
     }
-
-    return ans;
-
-}
-
+};
