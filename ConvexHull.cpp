@@ -90,7 +90,13 @@ int main(){
             st.push(top);
             st.push(idx);
             idx++;
-        }
+        }   
+    }
+
+    // Remaining elemnts push
+    for(int i=n-2; i>=0; i--){
+        if((arr[i]-pivot).orientaion(arr[n-1] - pivot) == 1) st.push(i);
+        else break;
     }
 
     vector<Vector> ans;
